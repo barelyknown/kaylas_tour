@@ -11,10 +11,3 @@ test:
   database: rails_rumble_2013_test
   pool: 5
   host: localhost
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: rails_rumble_2013_production
-  pool: 5
-  username: railsrumble2013
