@@ -1,1 +1,35 @@
-hello world
+.alert.alert-info
+  - random_school = School.offset(rand(0..School.count)).limit(1).first
+  %strong Hi!
+  You can learn about #{link_to "every single school", schools_path, style: "color: white; text-decoration: underline"} in the country here. For example, I bet you don't know much about #{link_to(random_school.name, random_school, style: "color: white; text-decoration: underline")}.
+.row
+  .col-xs-12.col-md-4
+    %h3 I <3 YouTube
+    %p
+      I go to YouTube for everything. So why not college tours too?
+      %b This website has every college in the US with links to the YouTube tour for just about everyone one.
+    %p Here's a tour from one of my top schools:
+    = render School.kaylas_list.sample.videos.order(position: :asc).first, embed: true
+
+    %h3 My School Lists
+    %ul.nav.nav-pills.nav-stacked
+      %li= link_to "Busy Writing Applications For...", schools_path(scope: "kaylas_list")
+      %li= link_to "New York City Schools", schools_path(scope: "new_york_city")
+      %li= link_to "Dream Schools", schools_path(scope: "dream")
+      %li= link_to "Schools with Study Abroad", schools_path(scope: "study_abroad")
+
+  .col-xs-12.col-md-5
+    .thumbnail{style: "text-align: center"}
+      %h2
+        Hi (: I'm Kayla
+      .portrait
+      .caption
+        %p
+          It is impossible for me to go to every college that I am interested in and tour the campus. Frustrated by this, I began thinking of ways to get an inside look on each school without visiting each and every campus. In my free time, I watch videos on the internet for music videos, makeup and beauty videos, and DIY craft videos. It gave me a great idea, to use YouTube to stream college tour videos for any college I typed in. Kayla's tour gives you the entire package, you can search from thousands of colleges to pull up multiple videos of the colleges campus while getting all the criteria about the school at the same time! From watching the videos, I have gotten a better insight on schools I have never been to before. I even learned more about schools that I have visited!
+
+  .col-xs-12.col-md-3
+    %h3 Football
+    %p I love football. Hover over my senior picture to see how long that's been going on! A lot of the schools that I'm interested in have football teams so we organized schools by conference. Here are the top 10:
+    %ul.nav.nav-pills.nav-stacked
+      - School.football_conferences.first(10).each do |football_conference|
+        %li= link_to football_conference, search_schools_path(query: football_conference)

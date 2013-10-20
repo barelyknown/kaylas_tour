@@ -22,6 +22,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem "jquery-turbolinks"
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -33,14 +34,24 @@ group :doc do
 end
 
 group :test do
+  gem 'rspec-rails'
   gem 'guard-rspec', '~> 4.0.3', require: false
+  gem 'ruby_gntp'
+  gem 'shoulda-matchers'
+end
+
+group :development, :test do
+  gem 'database_cleaner'
+  gem "debugger"
 end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'youtube_it'
+gem 'figaro'
 
 # Use Capistrano for deployment
 group :development do
@@ -54,5 +65,11 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem "rails_12factor"
 gem 'haml-rails', '~> 0.4'
+gem 'anjlab-bootstrap-rails', '>= 3.0.0.3', :require => 'bootstrap-rails', github: "barelyknown/bootstrap-rails", branch: "generate-md5-fingerprint-for-font-files"
+gem 'simple_form', github: 'barelyknown/simple_form', branch: 'ignore-default-input-class'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap', github: 'barelyknown/will_paginate-bootstrap'
+gem 'pg_search'
+gem 'acts_as_list'

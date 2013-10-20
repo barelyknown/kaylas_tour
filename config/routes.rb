@@ -1,4 +1,15 @@
 RailsRumble2013::Application.routes.draw do
+
+
+  resources :videos
+
+  resources :schools do
+    collection do
+      get "search"
+    end
+    resources :videos
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
