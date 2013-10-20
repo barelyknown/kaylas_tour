@@ -1,15 +1,18 @@
-.alert.alert-info
-  - random_school = School.offset(rand(0..School.count)).limit(1).first
-  %strong Hi!
-  You can learn about #{link_to "every single school", schools_path, style: "color: white; text-decoration: underline"} in the country here. For example, I bet you don't know much about #{link_to(random_school.name, random_school, style: "color: white; text-decoration: underline")}.
+- random_school = School.offset(rand(0..School.count)).limit(1).first
+- if random_school
+  .alert.alert-info
+    %strong Hi!
+    You can learn about #{link_to "every single school", schools_path, style: "color: white; text-decoration: underline"} in the country here. For example, I bet you don't know much about #{link_to(random_school.name, random_school, style: "color: white; text-decoration: underline")}.
 .row
   .col-xs-12.col-md-4
     %h3 I <3 YouTube
     %p
       I go to YouTube for everything. So why not college tours too?
       %b This website has every college in the US with links to the YouTube tour for just about everyone one.
-    %p Here's a tour from one of my top schools:
-    = render School.kaylas_list.sample.videos.order(position: :asc).first, embed: true
+    - sample_school = School.kaylas_list.sample
+    - if sample_school.videos.any?
+      %p Here's a tour from one of my top schools:
+      = render sample_school.videos.order(position: :asc).first, embed: true
 
     %h3 My School Lists
     %ul.nav.nav-pills.nav-stacked
