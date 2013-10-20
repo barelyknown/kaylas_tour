@@ -1,0 +1,19 @@
+- videoed_show_page_actions = local_assigns[:videoed_show_page_actions] || false
+- embed = local_assigns[:embed] || false
+
+.video
+  = simple_form_for [video], html: { class: "hidden" } do |f|
+    = f.input :featured, input_html: { checked: true }
+  .video-media
+    - if embed
+      .flex-video.widescreen
+        %iframe{src: video.embed_url, frameborder: "0", type: "text/html", id: "embed_video" }
+      %p#embed-description= video.description
+    - else
+      .thumbnail{style: "text-align: center"}
+        %h4= video.title
+        = link_to video.youtube_url do
+          = image_tag video.thumbnail_url
+        .caption
+          %p= video.description
+          = link_to "Feature this video", "#", class: "btn btn-default video-feature"

@@ -1,0 +1,18 @@
+%nav.navbar.navbar-default{role: "navigation"}
+
+  .navbar-header
+    = link_to "Kayla's Tour", root_path, class: "navbar-brand"
+    %button.navbar-toggle{ data: { toggle: "collapse", target: ".navbar-header-collapse" } }
+      - 3.times do
+        %span.icon-bar
+
+
+  .collapse.navbar-collapse.navbar-header-collapse
+    %ul.nav.navbar-nav
+      %li
+        %form.navbar-form.navbar-left{ role: "search", action: search_schools_path }
+          .form-group
+            %input.form-control{ type: "text", placeholder: "Search for any school!", name: "query", style: "background-color: #f0e6df" }
+
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to "All Colleges & Universities", schools_path

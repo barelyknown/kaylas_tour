@@ -1,0 +1,24 @@
+- if params[:query]
+  .alert.alert-info There are the schools that match the search "#{params[:query]}"
+%table.table
+  %thead
+    %tr
+      %th Links
+      %th School
+  %tbody
+    - @schools.each do |school|
+      %tr
+        %td
+          .btn-group
+            %button.btn.btn-default.btn-xs.dropdown-toggle{data: { toggle: "dropdown"} }
+              %span.glyphicon.glyphicon-link
+              %b.caret
+            %ul.dropdown-menu.pull-left
+              = render "schools/actions", school: school
+
+        %td
+          .school-name= link_to school.name, school
+          .school-address
+            %small= "#{school.city}, #{school.state_code}"
+
+= will_paginate @schools, renderer: BootstrapPagination::Rails if @schools.respond_to?(:total_pages)

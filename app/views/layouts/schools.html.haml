@@ -1,0 +1,11 @@
+- content_for(:content) do
+  - if @school.non_active?
+    %div.alert.alert-danger
+      %b Attention!
+      This school does not appear to be active.
+
+  %h2= link_to @school.name, @school
+  
+  = content_for(:school_content) ? yield(:school_content) : yield
+
+= render template: "layouts/application"

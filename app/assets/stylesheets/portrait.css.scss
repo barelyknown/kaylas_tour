@@ -1,0 +1,12 @@
+
+div.portrait {
+  width: 298px;
+  height: 424px;
+  margin-left: auto;
+  margin-right: auto;
+  background:transparent url(asset-path('kayla-home-1.jpg')) center top no-repeat;  
+}
+
+div.portrait:hover {
+   background-image: url(asset-path('kayla-baby-cheerleader.jpg'));
+}

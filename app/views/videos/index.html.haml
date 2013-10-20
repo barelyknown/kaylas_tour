@@ -1,0 +1,5 @@
+%h3 Videos
+- @videos.each_slice(2) do |slice|
+  .row
+    - slice.each do |video|
+      .col-xs-12.col-sm-6= render video, embed: false

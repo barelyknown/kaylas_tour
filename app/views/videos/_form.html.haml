@@ -1,0 +1,7 @@
+%h3 #{@video.persisted? ? "New" : "Edit"} Video
+= simple_form_for [@videoed, @video] do |f|
+  = f.input :videoed_id, as: :hidden
+  = f.input :videoed_type, as: :hidden
+  = f.input :youtube_id
+  = f.input :featured, ignore_default_input_class: true, label: false, inline_label: "Featured?"
+  = f.submit class: "btn btn-primary"

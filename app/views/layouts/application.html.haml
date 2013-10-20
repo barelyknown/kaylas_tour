@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+  %title
+    = content_for?(:title) ? yield(:title) : "Rails Rumble 2013"
+  = stylesheet_link_tag :application, :media => "all", "data-turbolinks-track" => true
+  = javascript_include_tag :application, "data-turbolinks-track" => true
+  = csrf_meta_tags
+  = yield(:head)
+
+  %body
+
+    = render "application/navbar"
+    .container
+      .row
+        .col-xs-12= render "application/flash"
+      .row
+        .col-xs-12
+          = content_for?(:content) ? yield(:content) : yield
+      .row
+        .col-xs-12
+          %hr
+          %h3 About <u>ME</u>
+          %h3 About this website
+          %p This website was made as part of #{link_to "Rails Rumble 2013", "http://railsrumble.com"}, a 48 hour programming competition for ruby developers. My stepdad (#{link_to "@barelyknown", "http://twitter.com/barelyknown"}) did the programming, and I provided the NEED! It's a good thing that the government shutdown ended, because all of the data came from the #{link_to "IPEDS Data Center", "http://nces.ed.gov/ipeds/datacenter/Default.aspx"} from the #{link_to "Institude of Education Sciences", "http://ies.ed.gov"}. The videos are all from #{link_to "YouTube", "http://youtube.com"} and were found with the help of the #{link_to "youtube_it gem", "https://github.com/kylejginavan/youtube_it"}.
+          %p Huge thanks to the open source software community for all the amazing libraries that were used.

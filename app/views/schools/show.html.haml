@@ -1,0 +1,230 @@
+- if @school.videos.any?
+  .row
+    .col-xs-12.col-sm-6.video-embed
+      = render @school.featured_video, videoed_show_page_actions: true, embed: true
+    .col-xs-12.col-sm-6
+      %h4 Other Videos
+      %ol
+        - @school.videos.order(position: :asc).limit(15).each do |video|
+          %li= link_to video.title, "#", data: { "embed-url" => video.embed_url, "description" => video.description }, class: "video-sidebar-link"
+  %hr
+.row
+  .col-xs-12.col-sm-6
+    
+    %h3 Location
+    %dl
+      %dt Address
+      %dd
+        %div= @school.street_address
+        %div #{@school.city}, #{@school.state_code} #{@school.postal_code}
+      %dt General Phone Number
+      %dd= phone_with_formatting(@school.general_phone_number)
+      %dt General Fax Number
+      %dd= phone_with_formatting(@school.general_fax_number)
+      %dt Open?
+      %dd= school_open_to_general_public(@school)
+
+    %h3 Type
+    %dl
+      %dt Purpose
+      %dd
+        - if @school.academic?
+          %span.glyphicon.glyphicon-check
+          Academic
+        - if @school.occupational?
+          %span.glyphicon.glyphicon-check
+          Occupational
+      %dt Degrees
+      %dd
+        - if @school.associates_degree?
+          %span.glyphicon.glyphicon-check
+          Associates
+        - if @school.bachelors_degree?
+          %span.glyphicon.glyphicon-check
+          Bachelors
+      %dt Level of Institution
+      %dd= @school.level_of_institution
+      %dt Undergraduate Offering
+      %dd= @school.undergraduate_offering
+      %dt Highest Degree Offered
+      %dd= @school.highest_degree_offered
+      %dt Highest Level Offered
+      %dd= @school.highest_level_of_offering
+      %dt Calendar System
+      %dd= @school.calendar_system
+
+    %h3 Links
+    %ul
+      = render "schools/actions", school: @school
+
+  .col-xs-12.col-sm-6
+    %h3 Mission
+    - if @school.mission_statement?
+      - if @school.mission_statement_url.present?
+        %div= link_to "View mission statement on school's website", @school.mission_statement_url
+      - if @school.mission_statement.present?
+        %p= @school.mission_statement
+    - else
+      %p Unavailable
+
+    %h3 Demographics
+    %dl
+      %dt Total Undergraduate Enrollment
+      %dd= number_with_delimiter @school.undergraduate_enrollment, precision: 0
+      %dt Total Enrollment
+      %dd= number_with_delimiter @school.enrollment_total, precision: 0
+      %dt Religous Affiliation
+      %dd= @school.religous_affiliation || "None"
+
+    %h3 Opportunities
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.all_remote? ? "check" : "unchecked"}"}
+      All remote programs
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.study_abroad? ? "check" : "unchecked"}"}
+      Study abroad
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.evenings_and_weekends? ? "check" : "unchecked"}"}
+      Evening and weekend classes
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.on_campus_housing? ? "check" : "unchecked"}"}
+      On-campus housing
+
+    %h3 Sports
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.member_of_ncaa? ? "check" : "unchecked"}"}
+      Member of NCAA
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.member_of_naia? ? "check" : "unchecked"}"}
+      Member of NAIA
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.has_football_team? ? "check" : "unchecked"}"}
+      Football team
+      - if @school.has_football_team?
+        (#{@school.football_conference})
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.has_basketball_team? ? "check" : "unchecked"}"}
+      Basketball team
+      - if @school.has_basketball_team?
+        (#{@school.basketball_conference})
+
+
+
+
+%h3 Admissions
+.row
+  .col-xs-12.col-sm-6
+    %h4 Fees and Process
+    - if @school.open_admissions?
+      %span.glyphicon.glyphicon-check
+      Open Admission
+
+    %dl
+      %dt Application Fee
+      %dd= number_to_currency @school.undergraduate_application_fee, precision: 0
+      %dt Links
+      %dd
+        %ul{style: "list-style-type: none; padding-left: 0"}
+          %li= link_to "Admissions website", @school.admissions_url if @school.admissions_url.present?
+          %li= link_to "Online application", @school.online_application_url if @school.online_application_url.present?
+
+    %h4 Secondary School Requirements
+    %dl
+      %dt GPA Requirement
+      %dd= @school.secondary_school_gpa_requirement
+      %dt Rank Requirement
+      %dd= @school.secondary_school_rank_requirement
+      %dt Transcript Requirement
+      %dd= @school.secondary_school_record_requirement
+      %dt Recommendations
+      %dd= @school.recommendations_requirement
+      %dt Formal Demonstration of Competencies
+      %dd= @school.formal_demonstration_of_competencies_requirement
+      %dt Admission Test Scores
+      %dd= @school.admission_test_score_requirement
+  .col-xs-12.col-sm-6
+    - unless @school.open_admissions?
+      %h4 Selectiveness
+      %dl
+        %dt Applicants
+        %dd= number_with_delimiter(@school.applicants)
+        %dt Admissions
+        %dd= number_with_delimiter(@school.admissions)
+        - if @school.admissions_percentage
+          %dt Admission %
+          %dd= number_to_percentage(@school.admissions_percentage * 100, precision: 0)
+
+      %h5 Standardized Test Scores
+      %table.table
+        %thead
+          %tr
+            %th Section
+            %th 25th %
+            %th 75th %
+        %tbody
+          %tr
+            %td ACT Composite
+            %td= @school.act_composite_25th_percentile
+            %td= @school.act_composite_75th_percentile
+          %tr
+            %td ACT Math
+            %td= @school.act_math_25th_percentile
+            %td= @school.act_math_75th_percentile
+          %tr
+            %td ACT Reading
+            %td= @school.act_english_25th_percentile
+            %td= @school.act_english_75th_percentile
+          %tr
+            %td ACT Writing
+            %td= @school.act_writing_25th_percentile
+            %td= @school.act_writing_75th_percentile
+          %tr
+            %td SAT Math
+            %td= @school.sat_math_25th_percentile
+            %td= @school.sat_math_75th_percentile
+          %tr
+            %td SAT Reading
+            %td= @school.sat_reading_25th_percentile
+            %td= @school.sat_reading_75th_percentile
+          %tr
+            %td SAT Writing
+            %td= @school.sat_writing_25th_percentile
+            %td= @school.sat_writing_75th_percentile
+
+
+.row
+  .col-xs-12.col-sm-6
+    %h3 Price
+    %dl
+      - if @school.net_price_calculator_url
+        %dd= link_to "Price calculator website", @school.net_price_calculator_url
+      - if @school.total_price_in_state_on_campus.to_i > 0
+        %dt Total Price In State On Campus
+        %dd= number_to_currency @school.total_price_in_state_on_campus, precision: 0
+      - if @school.total_price_out_of_state_on_campus.to_i > 0
+        %dt Total Price Out of State On Campus
+        %dd= number_to_currency @school.total_price_out_of_state_on_campus, precision: 0
+
+  .col-xs-12.col-sm-6
+    %h3 Financial Aid
+    - if @school.financial_aid_url
+      %div= link_to "Financial aid website", @school.financial_aid_url
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.tuition_payment_plan? ? "check" : "unchecked"}"}
+      Tuition Payment Plan
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.dual_credit? ? "check" : "unchecked"}"}
+      Advanced Placement Credit
+
+    %div
+      %span{class: "glyphicon glyphicon-#{@school.life_experience_credit? ? "check" : "unchecked"}"}
+      Life Experience Credit
+
+    %dl
+      - if @school.undergraduate_percent_receiving_financial_aid
+        %dt Percent of undergraduates receiving financial aid
+        %dd= number_to_percentage(@school.undergraduate_percent_receiving_financial_aid * 100, precision: 0)
+      %dt Average undergraduate financial aid
+      %dd= number_to_currency(@school.undergraduate_average_financial_aid, precision: 0)
+
+
