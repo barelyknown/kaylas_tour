@@ -9,7 +9,7 @@
   = csrf_meta_tags
   = yield(:head)
 
-  %body
+  %body{style: "padding-bottom: 30px;"}
 
     = render "application/navbar"
     .container
@@ -22,8 +22,11 @@
         .col-xs-12
           %hr
           %h3 About <u>ME</u>
-          %p I'm Kayla Henderson. I live in Chicago, IL and I am a senior at #{link_to "Lincoln Park High School", "http://lincolnparkhs.org"}. I am a Varsity cheerleader, a member of #{link_to "National Honors Society", "http://www.nhs.us"} and a member of #{link_to "Model United Nations", "http://www.nmun.org"}. If you gave me a crystal ball to look into the future with, I'd hope to see myself living in New York City as a cardiothoracic surgeon. I'd also love to live in Paris one day.
+          %p I'm Kayla Henderson. I live in Chicago, IL and I am a senior at #{link_to "Lincoln Park High School", "http://lincolnparkhs.org"}. I am a Varsity cheerleader, a member of #{link_to "National Honors Society", "http://www.nhs.us"} and a member of #{link_to "Model United Nations", "http://www.nmun.org"}. If you gave me a crystal ball to look into the future, I'd hope to see myself living in New York City as a cardiothoracic surgeon. I'd also love to live in Paris one day.
           %p Thank you for viewing my website! I like pen pals, #{mail_to "kayla@gopartage.com", "email me!"}. Or come say hi on twitter. I'm #{link_to "@kaylaahenderson", "https://twitter.com/kaylaahenderson"}.
           %h3 About this website
           %p This website was made as part of #{link_to "Rails Rumble 2013", "http://railsrumble.com"}, a 48 hour programming competition for ruby developers. My stepdad (#{link_to "@barelyknown", "http://twitter.com/barelyknown"}) did the programming, and I provided the NEED! It's a good thing that the government shutdown ended, because all of the data came from the #{link_to "IPEDS Data Center", "http://nces.ed.gov/ipeds/datacenter/Default.aspx"} from the #{link_to "Institute of Education Sciences", "http://ies.ed.gov"}. The videos are all from #{link_to "YouTube", "http://youtube.com"} and were found with the help of the #{link_to "youtube_it gem", "https://github.com/kylejginavan/youtube_it"}.
           %p Huge thanks to the open source software community for all the amazing libraries that were used.
+      .row
+        .col-xs-12{style: "text-align: center; margin-top: 20px;"}
+          = link_to(image_tag("http://s0.railsrumble.com/rails-rumble-badge-2013.png"), "http://railsrumble.com/entries/474-kaylas-tour")
