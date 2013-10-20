@@ -9,45 +9,45 @@ class VideosController < ApplicationController
     end
   end
 
-  def new
-    if @videoed
-      @video = @videoed.videos.build
-      render layout: @videoed.class.model_name.route_key
-    end
-  end
+  # def new
+  #   if @videoed
+  #     @video = @videoed.videos.build
+  #     render layout: @videoed.class.model_name.route_key
+  #   end
+  # end
 
-  def create
-    @video = Video.new(video_params)
-    if @video.save
-      @videoed = @video.videoed
-      redirect_to @videoed
-    else
-      render :new, layout: @videoed.class.model_name.route_key if @videoed
-    end 
-  end
+  # def create
+  #   @video = Video.new(video_params)
+  #   if @video.save
+  #     @videoed = @video.videoed
+  #     redirect_to @videoed
+  #   else
+  #     render :new, layout: @videoed.class.model_name.route_key if @videoed
+  #   end 
+  # end
 
-  def edit
-    @video = Video.find(params[:id])
-    render layout: @videoed.class.model_name.route_key
-  end
+  # def edit
+  #   @video = Video.find(params[:id])
+  #   render layout: @videoed.class.model_name.route_key
+  # end
 
-  def update
-    @video = Video.find(params[:id])
-    if @video.update(video_params)
-      set_videoed
-      redirect_to @videoed
-    else
-      raise @video.errors.full_messages.to_s
-      render :edit, layout: @video.videoed.class.model_name.route_key
-    end
-  end
+  # def update
+  #   @video = Video.find(params[:id])
+  #   if @video.update(video_params)
+  #     set_videoed
+  #     redirect_to @videoed
+  #   else
+  #     raise @video.errors.full_messages.to_s
+  #     render :edit, layout: @video.videoed.class.model_name.route_key
+  #   end
+  # end
 
-  def destroy
-    @video = Video.find(params[:id])
-    @video.destroy
-    set_videoed
-    redirect_to @videoed
-  end
+  # def destroy
+  #   @video = Video.find(params[:id])
+  #   @video.destroy
+  #   set_videoed
+  #   redirect_to @videoed
+  # end
 
 private
 
