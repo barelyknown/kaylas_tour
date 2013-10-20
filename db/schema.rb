@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020183914) do
+ActiveRecord::Schema.define(version: 20131020222759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 20131020183914) do
     t.datetime "videos_last_retrieved_at"
   end
 
+  add_index "schools", ["city"], name: "index_schools_on_city", using: :btree
+  add_index "schools", ["football_conference"], name: "index_schools_on_football_conference", using: :btree
   add_index "schools", ["ipeds_id"], name: "index_schools_on_ipeds_id", using: :btree
   add_index "schools", ["name"], name: "index_schools_on_name", using: :btree
 
@@ -115,5 +117,9 @@ ActiveRecord::Schema.define(version: 20131020183914) do
     t.string   "thumbnail_url"
     t.integer  "position"
   end
+
+  add_index "videos", ["videoed_id"], name: "index_videos_on_videoed_id", using: :btree
+  add_index "videos", ["videoed_type"], name: "index_videos_on_videoed_type", using: :btree
+  add_index "videos", ["youtube_id"], name: "index_videos_on_youtube_id", using: :btree
 
 end
