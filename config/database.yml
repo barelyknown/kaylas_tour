@@ -17,4 +17,4 @@ production:
   encoding: unicode
   database: kaylas_tour_production
   username: db
-  password: "f12a1db00639882d56063fc6f73582ef"
+  password: aac059a3c09cfd1521d5b8525b2ebd7a
