@@ -15,6 +15,6 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: railsrumble_production
-  username: "www-data"
+  database: kaylas_tour_production
+  username: db
   password: "f12a1db00639882d56063fc6f73582ef"

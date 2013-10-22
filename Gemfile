@@ -33,7 +33,7 @@ gem 'youtube_it'
 gem 'figaro'
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.0.0'
 end
 
 gem "rails_12factor"
