@@ -55,11 +55,10 @@ gem 'figaro'
 
 # Use Capistrano for deployment
 group :development do
-  gem 'capistrano', '~> 2.15'
+  gem 'capistrano'
 end
 
 group :production do
-  gem 'mysql2' # If using mysql in development, this can be outside the production group.
   gem 'therubyracer'
 end
 
